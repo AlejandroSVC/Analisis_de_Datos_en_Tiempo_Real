@@ -1,4 +1,4 @@
-# Tiempo real: Análisis predictivo mediante Regresión Lineal
+# Streaming data en tiempo real: Análisis predictivo mediante Regresión Lineal
 
 ![Banner](docs/assets/images/banner_delgado3.jpg)
 
