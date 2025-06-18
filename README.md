@@ -1,6 +1,6 @@
 # Tiempo real: Análisis predictivo mediante Regresión Lineal
 
-![Banner](docs/assets/images/banner.jpg)
+![Banner](docs/assets/images/banner_delgado3.jpg)
 
 ### Python code:
 
