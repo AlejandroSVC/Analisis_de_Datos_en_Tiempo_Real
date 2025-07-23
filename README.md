@@ -2,15 +2,15 @@
 
 ![Banner](docs/assets/images/banner_delgado3.jpg)
 
-### Python code:
+### Código Python:
 
-### 1. Import libraries
+### 1. Importar bibliotecas
 ```
 import json
 from kafka import KafkaConsumer
 from river import linear_model, preprocessing, metrics
 ```
-### 2. Kafka consumer for real-time data
+### 2. Kafka consumer para datos en tiempo real
 ```
 consumer = KafkaConsumer(
     'realtime-data',
@@ -18,19 +18,19 @@ consumer = KafkaConsumer(
     value_deserializer=lambda m: json.loads(m.decode('utf-8'))
 )
 ```
-### 3. River: Online regression model with feature scaling
+### 3. River: modelo de regresión online con escalamiento de variables independientes (features)
 ```
 model = preprocessing.StandardScaler() | linear_model.LinearRegression()
 mae = metrics.MAE()
 
 for message in consumer:
     data = message.value
-    # Example input: {'f1': 1.0, 'f2': 2.5, 'target': 10.2}
+    # Datos de entrada de ejemplo: {'f1': 1.0, 'f2': 2.5, 'target': 10.2}
     y = data.pop('target')
     X = data
 
-    # Predict and update
-    # When `predict_one` is called before the model has seen any data, `y_pred` can be `None`:
+    # Predecir y actualizar
+    # Cuando `predict_one` es invocado antes de que el modelo haya recibido datos, `y_pred` puede recibir el valor `None`:
     y_pred = model.predict_one(X) or 0.0 
     print(f"Predicted: {y_pred:.2f} | Actual: {y}")
     model.learn_one(X, y)
